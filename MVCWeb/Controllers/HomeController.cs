@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MVCWeb.Data;
 
 namespace MVCWeb.Controllers
 {
@@ -10,7 +11,31 @@ namespace MVCWeb.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
+            string testName = string.Empty;
+            //var testrec = null;
+
+            using (var db = new ProjectXEntities())
+            {
+                //var testrecords = from t in db.Tests
+                //                  where t.TestName == "retz"
+                //                  select t;
+
+                //foreach (var test in testrecords)
+                //{
+                //    testName = test.TestName;
+                //}
+
+
+                var testrecs = db.Tests.Where(t => t.TestName == "retz").ToList();
+
+                foreach (var tst in testrecs)
+                {
+                    testName = tst.TestName;
+                }
+
+                ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application. " + testName;
+            }
+
 
             return View();
         }

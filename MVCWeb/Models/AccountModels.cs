@@ -24,6 +24,7 @@ namespace MVCWeb.Models
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int UserId { get; set; }
+        [MaxLength(200)]
         public string UserName { get; set; }
     }
 
